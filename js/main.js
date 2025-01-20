@@ -37,8 +37,8 @@ BOTON_FICHA.addEventListener('click', () => {
                 nuevaFicha = crearFicha();
                 fichas.push(nuevaFicha);
 
-                const AGREGAR_FICHA = prompt("¿Deseas agregar otra mascota? (si/no)");
-                continuar = AGREGAR_FICHA.toLowerCase() === 'si';
+                const AGREGAR_FICHA = confirm("¿Deseas agregar otra mascota?");
+                continuar = AGREGAR_FICHA
             }
             console.log("Fichas registradas a la fecha: " + fichas.length);
         }
