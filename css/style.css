@@ -1,0 +1,39 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+/* Estilo Header */
+header {
+    background: linear-gradient(to right, #dc3f2e, #dc602e);
+    font-family: "Dekko", cursive;
+    color: #ffffff;
+  }
+
+h1 {
+    text-align: center;
+}
+
+main nav ul {
+    margin-top: 15%;
+    padding: 20px;
+    list-style-type: none;
+  }
+  main nav ul li {
+    margin: 20px auto;
+    width: 200px;
+    border: #dc602e 2px solid;
+    background-color: #dc602e;
+    border-radius: 20px;
+    text-align: center;
+    transition: all 1s;
+    color: #ffffff;
+    font-family: "Dekko", cursive;
+  }
+main nav ul li:hover {
+    background-color: #dc3f2e;
+    border: #dc3f2e 2px solid;
+    transform: scale(1.1, 1.1);
+  }

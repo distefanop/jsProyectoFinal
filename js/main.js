@@ -1,24 +1,30 @@
-// Se seleccionan los botones por su ID
+// Se declaran variables
+
 const BOTON_REFUGIO = document.getElementById('boton1');
 const BOTON_FICHA = document.getElementById('boton2');
+const BOTON_REGISTROS = document.getElementById('boton3');
 
-// Se agregan eventos al hacer click
 let nombreRefugio = null;
 let fichas = [];
+let continuar = true;
+let nuevaFicha;
+let perrosEnAdopcion;
 
+// Se declaran funciones
 function crearFicha() {
-    let nombre = prompt("¿Cómo se llama el perro/gato?");
-    let genero = prompt("¿Es perro o gato?");
-    let edad = parseInt(prompt("¿Qué edad tiene?")); // Validación básica para edad
+    let nombre = prompt("¿Cómo se llama?").toUpperCase();
+    let especie = prompt("¿Es perro o gato?").toUpperCase();
+    let edad = parseInt(prompt("¿Cuántos años tiene?")); // Validación básica para edad
 
-    return { nombre, genero, edad };
+    return { nombre, especie, edad };
 }
 
+// Se agregan eventos al hacer click
 BOTON_REFUGIO.addEventListener('click', () => {
   nombreRefugio = prompt("¿Cómo se llama el refugio?");
 
   if (nombreRefugio !== null) {
-    console.log("¡Hola," + nombreRefugio + "!");
+    alert("¡Hola, " + nombreRefugio.toUpperCase() + "!");
   } else {
     alert("No se ha introducido ningún dato");
   }
@@ -27,15 +33,30 @@ BOTON_REFUGIO.addEventListener('click', () => {
 BOTON_FICHA.addEventListener('click', () => {
     if (nombreRefugio === null) {
         alert("No se registró ningún refugio");}
-        else {let continuar = true;
-            while (continuar) {
-                const nuevaFicha = crearFicha();
+        else {  while (continuar) {
+                nuevaFicha = crearFicha();
                 fichas.push(nuevaFicha);
 
-                const seguirAgregando = prompt("¿Deseas agregar otra mascota? (si/no)");
-                continuar = seguirAgregando.toLowerCase() === 'si';
+                const AGREGAR_FICHA = prompt("¿Deseas agregar otra mascota? (si/no)");
+                continuar = AGREGAR_FICHA.toLowerCase() === 'si';
             }
-            console.log("Fichas registradas para el refugio: " + fichas.length);
+            console.log("Fichas registradas a la fecha: " + fichas.length);
         }
+        console.log(fichas)
 });
+
+BOTON_REGISTROS.addEventListener('click', () => {
+    if (fichas.lenght === null) {
+        alert("No se registró ninguna ficha");}
+        else {  perrosEnAdopcion = fichas.filter(ficha => ficha.especie === "PERRO");
+                gatosEnAdopcion = fichas.filter(ficha => ficha.especie === "GATO");
+            }
+
+            console.log("Perros en adopción: " + perrosEnAdopcion.length);
+            console.log("Gatos en adopción: " + gatosEnAdopcion.length);
+        }
+);
+
+
+
 
