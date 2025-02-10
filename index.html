@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- Link a CSS -->
-        <link rel="stylesheet" href="./css/style.css">
+    <!-- Link a CSS -->
+    <link rel="stylesheet" href="./css/style.css">
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Dekko&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Dekko&display=swap" rel="stylesheet">
     
     <title>Adoptagram | Inicio</title>
 
@@ -22,13 +22,126 @@
         </div>
     </header>
     <main>
-        <nav>
-            <ul>
-                <li id="boton1">Ingresar Refugio</li>
-                <li id="boton2">Ingresar Fichas</li>
-                <li id="boton3">Ver Registros</li>
-            </ul>
-        </nav>
+        <!-- <h2>Filtrar Tarjetas</h2> -->
+        <section id="boton-filtros">
+            <div>
+                <button id="generarTarjeta">Nueva Tarjeta</button>
+            </div>
+
+            <div id="filtros">
+                <select id="provincia">
+                    <option value="">Provincia</option>
+                    <option value="buenos_aires">Buenos Aires</option>
+                    <option value="caba">CABA</option>
+                    <option value="catamarca">Catamarca</option>
+                    <option value="chaco">Chaco</option>
+                    <option value="chubut">Chubut</option>
+                    <option value="cordoba">Córdoba</option>
+                    <option value="corrientes">Corrientes</option>
+                    <option value="entre_rios">Entre Ríos</option>
+                    <option value="formosa">Formosa</option>
+                    <option value="jujuy">Jujuy</option>
+                    <option value="la_pampa">La Pampa</option>
+                    <option value="la_rioja">La Rioja</option>
+                    <option value="mendoza">Mendoza</option>
+                    <option value="misiones">Misiones</option>
+                    <option value="neuquen">Neuquén</option>
+                    <option value="rio_negro">Río Negro</option>
+                    <option value="salta">Salta</option>
+                    <option value="san_juan">San Juan</option>
+                    <option value="san_luis">San Luis</option>
+                    <option value="santa_cruz">Santa Cruz</option>
+                    <option value="santa_fe">Santa Fé</option>
+                    <option value="sgo_del_estero">Santiago del Estero</option>
+                    <option value="tierra_del_fuego">Tierra del Fuego</option>
+                    <option value="tucuman">Tucumán</option>
+                </select>
+        
+                <select id="especie">
+                    <option value="">Especie</option>
+                    <option value="gato">Gato</option>
+                    <option value="perro">Perro</option>
+                </select>
+        
+                <select id="sexo">
+                    <option value="">Sexo</option>
+                    <option value="hembra">Hembra</option>
+                    <option value="macho">Macho</option>
+        
+                </select>
+        
+                <select id="energico">
+                    <option value="">Enérgico</option>
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+        
+                <select id="desparasitado">
+                    <option value="">Desparasitado</option>
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+        
+                <select id="esterilizado">
+                    <option value="">Esterilizado</option>
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+        </section>
+
+        <section id="contenedorTarjetas"></section>
+        
+        
+        <div id="modal" class="modal">
+          <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Editar Tarjeta</h2>
+            <input type="text" id="modalNombre" placeholder="Nombre" class="modal-nombre"><br>
+            <input type="text" id="modalEdad" placeholder="Edad" class="modal-edad"><br>
+            <select id="modalProvincia" name="modalProvincia" placeholder="Provincia" class="modal-provincia">
+                <option value="" disabled selected>Provincia</option>
+                <option value="buenos_aires">Buenos Aires</option>
+                <option value="caba">CABA</option>
+                <option value="catamarca">Catamarca</option>
+                <option value="chaco">Chaco</option>
+                <option value="chubut">Chubut</option>
+                <option value="cordoba">Córdoba</option>
+                <option value="corrientes">Corrientes</option>
+                <option value="entre_rios">Entre Ríos</option>
+                <option value="formosa">Formosa</option>
+                <option value="jujuy">Jujuy</option>
+                <option value="la_pampa">La Pampa</option>
+                <option value="la_rioja">La Rioja</option>
+                <option value="mendoza">Mendoza</option>
+                <option value="misiones">Misiones</option>
+                <option value="neuquen">Neuquén</option>
+                <option value="rio_negro">Río Negro</option>
+                <option value="salta">Salta</option>
+                <option value="san_juan">San Juan</option>
+                <option value="san_luis">San Luis</option>
+                <option value="santa_cruz">Santa Cruz</option>
+                <option value="santa_fe">Santa Fé</option>
+                <option value="sgo_del_estero">Santiago del Estero</option>
+                <option value="tierra_del_fuego">Tierra del Fuego</option>
+                <option value="tucuman">Tucumán</option>
+            </select><br>
+            <select id="modalEspecie" name="modalEspecie" placeholder="Especie" class="modal-especie">
+                <option value="" disabled selected>Especie</option>
+                <option value="gato">Gato</option>
+                <option value="perro">Perro</option>
+            </select><br>            
+            <select id="modalSexo" name="modalSexo" placeholder="Sexo" class="modal-sexo">
+                <option value="" disabled selected>Sexo</option>
+                <option value="hembra">Hembra</option>
+                <option value="macho">Macho</option>
+            </select><br>         
+            <input type="checkbox" id="modalEnergico"> <label for="modalEnergico">Enérgico</label><br>
+            <input type="checkbox" id="modalDesparasitado"> <label for="modalDesparasitado">Desparasitado</label><br>
+            <input type="checkbox" id="modalEsterilizado"> <label for="modalEsterilizado">Esterilizado</label><br>
+            <button id="guardarCambios">Guardar Cambios</button>
+          </div>
+        </div>
     </main>
     <script src="./js/main.js"></script>
 </body>

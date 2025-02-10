@@ -8,32 +8,197 @@
 /* Estilo Header */
 header {
     background: linear-gradient(to right, #dc3f2e, #dc602e);
-    font-family: "Dekko", cursive;
     color: #ffffff;
   }
 
-h1 {
+h1, h2 {
     text-align: center;
+    font-family: "Dekko", cursive;
+  }
+
+#boton-filtros {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px
 }
 
-main nav ul {
-    margin-top: 15%;
-    padding: 20px;
-    list-style-type: none;
-  }
-  main nav ul li {
-    margin: 20px auto;
+#provincia {
+  width: 150px;
+  border: #dc3f2e 2px solid;
+  border-radius: 20px;
+  text-align: center;
+  background-color: #dc3f2e;
+  color: #ffffff;
+  font-family: "Dekko", cursive;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+
+#especie {
+  width: 150px;
+  border: #dc3f2e 2px solid;
+  border-radius: 20px;
+  text-align: center;
+  background-color: #dc3f2e;
+  color: #ffffff;
+  font-family: "Dekko", cursive;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+#sexo {
+  width: 150px;
+  border: #dc3f2e 2px solid;
+  border-radius: 20px;
+  text-align: center;
+  background-color: #dc3f2e;
+  color: #ffffff;
+  font-family: "Dekko", cursive;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+#energico {
+  width: 150px;
+  border: #dc3f2e 2px solid;
+  border-radius: 20px;
+  text-align: center;
+  background-color: #dc3f2e;
+  color: #ffffff;
+  font-family: "Dekko", cursive;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+#desparasitado {
+  width: 150px;
+  border: #dc3f2e 2px solid;
+  border-radius: 20px;
+  text-align: center;
+  background-color: #dc3f2e;
+  color: #ffffff;
+  font-family: "Dekko", cursive;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+#esterilizado {
+  width: 150px;
+  border: #dc3f2e 2px solid;
+  border-radius: 20px;
+  text-align: center;
+  background-color: #dc3f2e;
+  color: #ffffff;
+  font-family: "Dekko", cursive;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.option value:hover{
+  background-color: #ccc;
+}
+
+.reset-button {
+  background-color: #ffffff;
+  color: #dc3f2e;
+  padding: 10px 15px;
+  border: none;
+  font-family: "Dekko", cursive;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+#generarTarjeta {
     width: 200px;
     border: #dc602e 2px solid;
     background-color: #dc602e;
     border-radius: 20px;
-    text-align: center;
     transition: all 1s;
     color: #ffffff;
     font-family: "Dekko", cursive;
+    font-size: 18px;
   }
-main nav ul li:hover {
+#generarTarjeta:hover {
     background-color: #dc3f2e;
     border: #dc3f2e 2px solid;
     transform: scale(1.1, 1.1);
+  }
+
+#contenedorTarjetas{
+  margin: 20px 40px;
+  justify-content: center;
+}
+
+.tarjeta {
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 10px;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+.tarjeta img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+
+.tarjeta img:hover {
+    opacity: 0.5;
+  }
+
+.tarjeta div {
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  font-family: "Dekko", cursive;
+}
+
+.tarjeta .botones {
+  flex-direction: column;
+  padding: 0;
+
+}f
+
+.tarjeta .botones button {
+  margin: 10px; /* Espacio entre los botones */
+  font-family: "Dekko", cursive;
+}
+  
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    font-family: "Dekko", cursive;
+  }
+  
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+
+.modal-nombre, .modal-edad, .modal-provincia, .modal-especie, .modal-sexo {
+    font-family: "Dekko", cursive; 
+    font-size: 15px;
+    margin-top: 5px;
+    width: 200px;
+}
+  
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
   }
