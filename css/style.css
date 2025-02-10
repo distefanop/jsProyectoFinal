@@ -96,10 +96,6 @@ h1, h2 {
   cursor: pointer;
 }
 
-.option value:hover{
-  background-color: #ccc;
-}
-
 .reset-button {
   background-color: #ffffff;
   color: #dc3f2e;
@@ -137,6 +133,7 @@ h1, h2 {
     margin: 10px;
     display: inline-block;
     cursor: pointer;
+    border-radius: 5px;
   }
   
 .tarjeta img {
