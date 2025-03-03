@@ -122,9 +122,12 @@ cursor: pointer;
   transform: scale(1.1, 1.1);
 }
 
-#contenedorTarjetas{
-margin: 20px 40px;
-justify-content: center;
+#contenedorTarjetas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Alinea las tarjetas a la izquierda */
+  margin-left: 2%;
+  margin-right: 2%;
 }
 
 .tarjeta {
