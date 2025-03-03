@@ -107,7 +107,7 @@ function crearTarjeta(nombre, edad) {
             const nuevoDesparasitado = modalDesparasitado.checked;
             const nuevoEsterilizado = modalEsterilizado.checked;
         
-            // Verificar si se modificaron los campos
+            // Verifica si se modificaron los campos
             if (
             nuevoNombre === tarjeta.nombre &&
             nuevaEdad === tarjeta.edad &&
@@ -249,11 +249,11 @@ window.addEventListener('DOMContentLoaded', () => {
             // Asegúrate de que la propiedad 'editando' sea false al cargar
             tarjetaGuardada.editando = false;
 
-            // Busca si la tarjeta ya existe en el array 'tarjetas'
+            // Se fija si tarjeta ya existe en el array 'tarjetas'
             let tarjetaExistente = tarjetas.find(tarjeta => tarjeta.nombre === tarjetaGuardada.nombre);
 
-            if (tarjetaExistente) {
-                // Actualiza las propiedades de la tarjeta existente
+            // Actualiza las propiedades de la tarjeta existente
+            if (tarjetaExistente) {            
                 tarjetaExistente.edad = tarjetaGuardada.edad;
                 tarjetaExistente.provincia = tarjetaGuardada.provincia;
                 tarjetaExistente.especie = tarjetaGuardada.especie;
@@ -263,12 +263,12 @@ window.addEventListener('DOMContentLoaded', () => {
                 tarjetaExistente.esterilizado = tarjetaGuardada.esterilizado;
                 tarjetaExistente.imagen = tarjetaGuardada.imagen;
 
-                // Actualiza la visualización de la tarjeta existente
+            // Actualiza la visualización de la tarjeta existente
                 tarjetaExistente.elemento.querySelector('.info').innerHTML = `<strong>${tarjetaExistente.nombre.toUpperCase()}</strong> (${tarjetaExistente.edad} años)`;
                 tarjetaExistente.elemento.querySelector('img').src = tarjetaExistente.imagen;
                 contenedorTarjetas.appendChild(tarjetaExistente.elemento);
             } else {
-                // Si la tarjeta no existe, crea una nueva
+            // Si la tarjeta no existe, crea una nueva
                 const nuevaTarjeta = crearTarjeta(tarjetaGuardada.nombre, tarjetaGuardada.edad);
                 nuevaTarjeta.provincia = tarjetaGuardada.provincia;
                 nuevaTarjeta.especie = tarjetaGuardada.especie;
