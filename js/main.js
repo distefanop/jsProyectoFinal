@@ -1,3 +1,4 @@
+// Variables y funciones iniciales
 
 const generarTarjeta = document.getElementById('generarTarjeta');
 const contenedorTarjetas = document.getElementById('contenedorTarjetas');
@@ -13,20 +14,17 @@ const modalEsterilizado = document.getElementById('modalEsterilizado');
 const guardarCambios = document.getElementById('guardarCambios');
 const closeButton = document.querySelector('.close-button');
 const filtros = document.getElementById("filtros");
+const selectProvincia = document.getElementById("provincia");
+const selectModalProvincia = document.getElementById("modalProvincia");
 
 let tarjetas = [];
+let provincias = [];
 
 function guardarTarjetas() {
     localStorage.setItem('tarjetas', JSON.stringify(tarjetas));
 }
 
-generarTarjeta.addEventListener('click', () => {
-    const nuevaTarjeta = crearTarjeta('Nombre', 'Edad');
-    contenedorTarjetas.appendChild(nuevaTarjeta.elemento);
-
-    tarjetas.push(nuevaTarjeta);
-    guardarTarjetas();
-});
+// Función para crear tarjetas
 
 function crearTarjeta(nombre, edad) {
     const tarjeta = {
@@ -67,7 +65,6 @@ function crearTarjeta(nombre, edad) {
                 reader.readAsDataURL(file);
             }
         });
-
         seleccionImagen.click();
     });
 
@@ -94,16 +91,14 @@ function crearTarjeta(nombre, edad) {
         modalEnergico.checked = tarjeta.energico;
         modalDesparasitado.checked = tarjeta.desparasitado;
         modalEsterilizado.checked = tarjeta.esterilizado;
-
+        
         guardarCambios.removeEventListener('click', guardar);
         guardarCambios.addEventListener('click', guardar);
-
+    
         function guardar(evento) {
             evento.preventDefault();
-
-            const nuevoNombre = modalNombre.value;
-
-            tarjeta.nombre = nuevoNombre.toLowerCase();
+        
+            const nuevoNombre = modalNombre.value.toLowerCase();
             const nuevaEdad = modalEdad.value;
             const nuevaProvincia = modalProvincia.value;
             const nuevaEspecie = modalEspecie.value;
@@ -111,35 +106,117 @@ function crearTarjeta(nombre, edad) {
             const nuevoEnergico = modalEnergico.checked;
             const nuevoDesparasitado = modalDesparasitado.checked;
             const nuevoEsterilizado = modalEsterilizado.checked;
-
-            tarjeta.edad = nuevaEdad;
-            tarjeta.provincia = nuevaProvincia;
-            tarjeta.especie = nuevaEspecie;
-            tarjeta.sexo = nuevoSexo;
-            tarjeta.energico = nuevoEnergico;
-            tarjeta.desparasitado = nuevoDesparasitado;
-            tarjeta.esterilizado = nuevoEsterilizado;
-
-            info.innerHTML = `<strong>${tarjeta.nombre.toUpperCase()}</strong> (${tarjeta.edad} años)`;
-            modal.style.display = 'none';
-            tarjeta.editando = false;
-
-            guardarCambios.removeEventListener('click', guardar);
-            guardarTarjetas();
+        
+            // Verificar si se modificaron los campos
+            if (
+            nuevoNombre === tarjeta.nombre &&
+            nuevaEdad === tarjeta.edad &&
+            nuevaProvincia === tarjeta.provincia &&
+            nuevaEspecie === tarjeta.especie &&
+            nuevoSexo === tarjeta.sexo &&
+            nuevoEnergico === tarjeta.energico &&
+            nuevoDesparasitado === tarjeta.desparasitado &&
+            nuevoEsterilizado === tarjeta.esterilizado
+            ) {          
+            Swal.fire({
+                title: 'No se realizaron cambios',
+                text: 'No se modificó ningún campo',
+                icon: 'info',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#84b333',
+                customClass: {
+                    popup: 'swal2-contenedor',
+                    htmlContainer: 'contenido',
+                    confirmButton: 'btnConfirmar',
+                }
+            });
+            
+            return;
+        }
+    
+        tarjeta.nombre = nuevoNombre;
+        tarjeta.edad = nuevaEdad;
+        tarjeta.provincia = nuevaProvincia;
+        tarjeta.especie = nuevaEspecie;
+        tarjeta.sexo = nuevoSexo;
+        tarjeta.energico = nuevoEnergico;
+        tarjeta.desparasitado = nuevoDesparasitado;
+        tarjeta.esterilizado = nuevoEsterilizado;
+    
+        info.innerHTML = `<strong>${tarjeta.nombre.toUpperCase()}</strong> (${tarjeta.edad} años)`;
+        modal.style.display = 'none';
+        tarjeta.editando = false;
+    
+        guardarCambios.removeEventListener('click', guardar);
+        guardarTarjetas();
+    
+        Swal.fire({
+            title: 'Tarjeta Actualizada',
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#84b333',
+            customClass: {
+                popup: 'swal2-contenedor',
+                htmlContainer: 'contenido',
+                confirmButton: 'btnConfirmar',
+            }
+            });
         }
     });
-
+    
     botonesDiv.appendChild(botonEditar);
 
     const botonEliminar = document.createElement('button');
     botonEliminar.textContent = 'Eliminar';
     botonEliminar.addEventListener('click', () => {
-        tarjeta.elemento.remove();
-        const indice = tarjetas.indexOf(tarjeta);
-        if (indice > -1) {
-            tarjetas.splice(indice, 1);
-            guardarTarjetas();
-        }
+        Swal.fire({
+            title: "¿Estás seguro?",
+            text: "La tarjeta se eliminará definitivamente",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: '#84b333',
+            cancelButtonColor: '#dc602e',
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar',
+            customClass: {
+                popup: 'swal2-contenedor',
+                htmlContainer: 'contenido',
+                confirmButton: 'btnConfirmar',
+                cancelButton: 'btnCancelar'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                try {
+                    tarjeta.elemento.remove();
+                    const indice = tarjetas.indexOf(tarjeta);
+                    if (indice > -1) {
+                        tarjetas.splice(indice, 1);
+                        guardarTarjetas();
+                    }
+                    Swal.fire({
+                        title: "Eliminada",
+                        text: "La tarjeta fue eliminada",
+                        icon: "success",
+                        confirmButtonColor: '#84b333',
+                        customClass: {
+                            popup: 'swal2-contenedor',
+                            htmlContainer: 'contenido',
+                            confirmButton: 'btnConfirmar',
+                        }
+                    });
+                } catch (error) {
+                    console.error("Error al eliminar la tarjeta:", error);
+                    Swal.fire({
+                        title: "Error",
+                        text: "No se pudo eliminar la ficha",
+                        icon: "error",
+                        customClass: {
+                            htmlContainer: 'contenido',
+                        }
+                    });
+                }
+            }
+        });
     });
 
     botonesDiv.appendChild(botonEliminar);
@@ -149,29 +226,65 @@ function crearTarjeta(nombre, edad) {
     return tarjeta;
 }
 
+// Eventos y funciones de interacción
+
+generarTarjeta.addEventListener('click', () => {
+    const nuevaTarjeta = crearTarjeta('Nombre', 'Edad');
+    contenedorTarjetas.appendChild(nuevaTarjeta.elemento);
+
+    tarjetas.push(nuevaTarjeta);
+    guardarTarjetas();
+});
+
 closeButton.addEventListener('click', () => {
     modal.style.display = 'none';
 });
 
 window.addEventListener('DOMContentLoaded', () => {
+    contenedorTarjetas.innerHTML = '';
     const tarjetasGuardadas = localStorage.getItem('tarjetas');
     if (tarjetasGuardadas) {
-        tarjetas = JSON.parse(tarjetasGuardadas);
-        tarjetas.forEach(tarjeta => {
-            const nuevaTarjeta = crearTarjeta(tarjeta.nombre, tarjeta.edad);
-            nuevaTarjeta.nombre = tarjeta.nombre;
-            nuevaTarjeta.edad = tarjeta.edad;
-            nuevaTarjeta.provincia = tarjeta.provincia;
-            nuevaTarjeta.especie = tarjeta.especie;
-            nuevaTarjeta.sexo = tarjeta.sexo;
-            nuevaTarjeta.energico = tarjeta.energico;
-            nuevaTarjeta.desparasitado = tarjeta.desparasitado;
-            nuevaTarjeta.esterilizado = tarjeta.esterilizado;
-            nuevaTarjeta.elemento.querySelector('.info').innerHTML = `<strong>${tarjeta.nombre.toUpperCase()}</strong> (${tarjeta.edad} años)`;
-            nuevaTarjeta.elemento.querySelector('img').src = tarjeta.imagen;
-            contenedorTarjetas.appendChild(nuevaTarjeta.elemento);
+        const tarjetasGuardadasArray = JSON.parse(tarjetasGuardadas);
+        tarjetasGuardadasArray.forEach(tarjetaGuardada => {
+            // Asegúrate de que la propiedad 'editando' sea false al cargar
+            tarjetaGuardada.editando = false;
+
+            // Busca si la tarjeta ya existe en el array 'tarjetas'
+            let tarjetaExistente = tarjetas.find(tarjeta => tarjeta.nombre === tarjetaGuardada.nombre);
+
+            if (tarjetaExistente) {
+                // Actualiza las propiedades de la tarjeta existente
+                tarjetaExistente.edad = tarjetaGuardada.edad;
+                tarjetaExistente.provincia = tarjetaGuardada.provincia;
+                tarjetaExistente.especie = tarjetaGuardada.especie;
+                tarjetaExistente.sexo = tarjetaGuardada.sexo;
+                tarjetaExistente.energico = tarjetaGuardada.energico;
+                tarjetaExistente.desparasitado = tarjetaGuardada.desparasitado;
+                tarjetaExistente.esterilizado = tarjetaGuardada.esterilizado;
+                tarjetaExistente.imagen = tarjetaGuardada.imagen;
+
+                // Actualiza la visualización de la tarjeta existente
+                tarjetaExistente.elemento.querySelector('.info').innerHTML = `<strong>${tarjetaExistente.nombre.toUpperCase()}</strong> (${tarjetaExistente.edad} años)`;
+                tarjetaExistente.elemento.querySelector('img').src = tarjetaExistente.imagen;
+                contenedorTarjetas.appendChild(tarjetaExistente.elemento);
+            } else {
+                // Si la tarjeta no existe, crea una nueva
+                const nuevaTarjeta = crearTarjeta(tarjetaGuardada.nombre, tarjetaGuardada.edad);
+                nuevaTarjeta.provincia = tarjetaGuardada.provincia;
+                nuevaTarjeta.especie = tarjetaGuardada.especie;
+                nuevaTarjeta.sexo = tarjetaGuardada.sexo;
+                nuevaTarjeta.energico = tarjetaGuardada.energico;
+                nuevaTarjeta.desparasitado = tarjetaGuardada.desparasitado;
+                nuevaTarjeta.esterilizado = tarjetaGuardada.esterilizado;
+                nuevaTarjeta.imagen = tarjetaGuardada.imagen;
+                nuevaTarjeta.elemento.querySelector('.info').innerHTML = `<strong>${nuevaTarjeta.nombre.toUpperCase()}</strong> (${nuevaTarjeta.edad} años)`;
+                nuevaTarjeta.elemento.querySelector('img').src = nuevaTarjeta.imagen;
+                contenedorTarjetas.appendChild(nuevaTarjeta.elemento);
+                tarjetas.push(nuevaTarjeta);
+            }
         });
     }
+    cargarProvincias();
 });
 
 function filtrarTarjetas() {
@@ -213,11 +326,11 @@ function filtrarTarjetas() {
     });
 }
 
+
 filtros.addEventListener("change", filtrarTarjetas);
 
 filtrarTarjetas();
 
-// Botón para resetear filtros
 const botonReset = document.createElement('button');
 botonReset.textContent = 'Resetear Filtros';
 filtros.appendChild(botonReset);
@@ -232,4 +345,35 @@ botonReset.addEventListener('click', () => {
     document.getElementById('esterilizado').value = '';
 
     filtrarTarjetas();
-  });
+    });
+
+// Función para cargar provincias desde una API
+
+function cargarProvincias() {
+    fetch('https://apis.datos.gob.ar/georef/api/provincias?campos=id,nombre')
+        .then(response => response.json())
+        .then(data => {
+            provincias = data.provincias.map(provincia => {
+                let nombre = provincia.nombre;
+                if (nombre === "Ciudad Autónoma de Buenos Aires") {
+                    nombre = "CABA";
+                } else if (nombre === "Tierra del Fuego, Antártida e Islas del Atlántico Sur") {
+                    nombre = "Tierra del Fuego";
+                }
+                return nombre;
+            });
+            provincias.sort();
+            provincias.forEach(provincia => {
+                const option = document.createElement('option');
+                option.value = provincia;
+                option.textContent = provincia;
+                selectProvincia.appendChild(option);
+
+                const modalOption = document.createElement('option');
+                modalOption.value = provincia;
+                modalOption.textContent = provincia;
+                selectModalProvincia.appendChild(modalOption);
+            });
+        })
+        .catch(error => console.error('Error al cargar provincias:', error));
+}
