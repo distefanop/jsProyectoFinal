@@ -96,15 +96,31 @@ font-size: 15px;
 cursor: pointer;
 }
 
-.reset-button {
+#contenedorBotones {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#reset-button {
 background-color: #ffffff;
 color: #dc3f2e;
-padding: 10px 15px;
+margin-left: 5px;
 border: none;
 font-family: "Dekko", cursive;
 font-size: 15px;
 cursor: pointer;
 }
+
+#delete-button {
+  background-color: #ffffff;
+  color: #3d3837;
+  margin-left: 5px;
+  border: none;
+  font-family: "Dekko", cursive;
+  font-size: 12.5px;
+  cursor: pointer;
+  }
 
 #generarTarjeta {
   width: 200px;

@@ -16,6 +16,8 @@ const closeButton = document.querySelector('.close-button');
 const filtros = document.getElementById("filtros");
 const selectProvincia = document.getElementById("provincia");
 const selectModalProvincia = document.getElementById("modalProvincia");
+const botonReset = document.getElementById("reset-button");
+const botonDelete = document.getElementById("delete-button");
 
 let tarjetas = [];
 let provincias = [];
@@ -331,11 +333,6 @@ filtros.addEventListener("change", filtrarTarjetas);
 
 filtrarTarjetas();
 
-const botonReset = document.createElement('button');
-botonReset.textContent = 'Resetear Filtros';
-filtros.appendChild(botonReset);
-botonReset.classList.add('reset-button')
-
 botonReset.addEventListener('click', () => {
     document.getElementById('provincia').value = '';
     document.getElementById('especie').value = '';
@@ -346,6 +343,49 @@ botonReset.addEventListener('click', () => {
 
     filtrarTarjetas();
     });
+
+botonDelete.addEventListener('click', () => {
+    Swal.fire({
+        title: "¿Estás seguro?",
+        text: "Las tarjetas definitivamente",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: '#84b333',
+        cancelButtonColor: '#dc602e',
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar',
+        customClass: {
+            popup: 'swal2-contenedor',
+            htmlContainer: 'contenido',
+            confirmButton: 'btnConfirmar',
+            cancelButton: 'btnCancelar'
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            eliminarTarjetas();
+        }
+    });
+});
+
+function eliminarTarjetas() {
+    tarjetas.forEach(tarjeta => {
+        tarjeta.elemento.remove();
+    });
+    tarjetas = [];
+    guardarTarjetas();
+    contenedorTarjetas.innerHTML = '';
+    Swal.fire({
+        title: "Tarjetas Eliminadas",
+        text: "Todas las tarjetas han sido eliminadas",
+        icon: "success",
+        confirmButtonColor: '#84b333',
+        customClass: {
+            popup: 'swal2-contenedor',
+            htmlContainer: 'contenido',
+            confirmButton: 'btnConfirmar',
+        }
+    });
+}
 
 // Función para cargar provincias desde una API
 
