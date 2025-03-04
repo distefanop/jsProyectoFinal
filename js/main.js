@@ -346,7 +346,7 @@ botonReset.addEventListener('click', () => {
 botonDelete.addEventListener('click', () => {
     Swal.fire({
         title: "¿Estás seguro?",
-        text: "Las tarjetas serán eliminadas de forma permanente",
+        text: "Las tarjetas se eliminarán de forma permanente",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: '#84b333',
