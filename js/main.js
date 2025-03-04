@@ -83,6 +83,8 @@ function crearTarjeta(nombre, edad) {
     const botonEditar = document.createElement('button');
     botonEditar.textContent = 'Editar';
     botonEditar.addEventListener('click', () => {
+        guardarCambios.removeEventListener('click', guardar);
+
         tarjeta.editando = true;
         modal.style.display = 'block';
         modalNombre.value = tarjeta.nombre.toUpperCase();
@@ -94,7 +96,6 @@ function crearTarjeta(nombre, edad) {
         modalDesparasitado.checked = tarjeta.desparasitado;
         modalEsterilizado.checked = tarjeta.esterilizado;
         
-        guardarCambios.removeEventListener('click', guardar);
         guardarCambios.addEventListener('click', guardar);
     
         function guardar(evento) {
