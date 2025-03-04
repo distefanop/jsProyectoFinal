@@ -248,7 +248,6 @@ window.addEventListener('DOMContentLoaded', () => {
     if (tarjetasGuardadas) {
         const tarjetasGuardadasArray = JSON.parse(tarjetasGuardadas);
         tarjetasGuardadasArray.forEach(tarjetaGuardada => {
-            // Asegúrate de que la propiedad 'editando' sea false al cargar
             tarjetaGuardada.editando = false;
 
             // Se fija si tarjeta ya existe en el array 'tarjetas'
