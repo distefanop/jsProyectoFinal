@@ -241,14 +241,14 @@ font-family: "Dekko", cursive;
 
 .swal2-popup.swal2-contenedor {
   border-radius: 30px;
-  width: 360px;
+  width: 380px;
 }
 
 .swal2-popup .contenido {
   text-align: center;
   font-family: "Dekko", cursive; 
   padding: 1px;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .swal2-popup .btnConfirmar {

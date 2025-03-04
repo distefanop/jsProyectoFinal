@@ -173,7 +173,7 @@ function crearTarjeta(nombre, edad) {
     botonEliminar.addEventListener('click', () => {
         Swal.fire({
             title: "¿Estás seguro?",
-            text: "La tarjeta se eliminará definitivamente",
+            text: "La tarjeta se eliminará de forma permanente",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: '#84b333',
@@ -347,7 +347,7 @@ botonReset.addEventListener('click', () => {
 botonDelete.addEventListener('click', () => {
     Swal.fire({
         title: "¿Estás seguro?",
-        text: "Las tarjetas definitivamente",
+        text: "Las tarjetas serán eliminadas de forma permanente",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: '#84b333',
